@@ -16,6 +16,7 @@ import support.holders.SessionsHolder;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Properties;
 
 /**
  * Created by ANykytenko on 8/16/2016.
@@ -23,11 +24,16 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class PagesController {
 
+    private static final String TOURNAMENT_REGULATIONS_URL_KEY = "tournament_regulations_url";
+
     @Autowired
     private SimpMessagingTemplate messagingTemplate;
 
     @Autowired
     private SessionsHolder sessionsHolder;
+
+    @Autowired
+    private Properties properties;
 
     @RequestMapping(value = {"/Pages/Challenges"}, method = {RequestMethod.GET})
     public ModelAndView challengesPage() {
@@ -35,6 +41,7 @@ public class PagesController {
         User securityUser = (User) (auth.getPrincipal());
         ModelAndView model = new ModelAndView();
         model.addObject("user", sessionsHolder.getUserByName(securityUser.getUsername()));
+        model.addObject("tournamentRegulationsUrl", properties.getProperty(TOURNAMENT_REGULATIONS_URL_KEY));
         model.setViewName("Challenges");
         return model;
     }
@@ -45,6 +52,7 @@ public class PagesController {
         User securityUser = (User) (auth.getPrincipal());
         ModelAndView model = new ModelAndView();
         model.addObject("user", sessionsHolder.getUserByName(securityUser.getUsername()));
+        model.addObject("tournamentRegulationsUrl", properties.getProperty(TOURNAMENT_REGULATIONS_URL_KEY));
         model.setViewName("Ranks");
         return model;
     }
