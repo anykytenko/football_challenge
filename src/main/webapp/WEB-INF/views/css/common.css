@@ -41,3 +41,7 @@ h2 {
 .inactive {
     pointer-events: none;
 }
+
+a.tournamet-regulation {
+    padding-left: 20px;
+}
