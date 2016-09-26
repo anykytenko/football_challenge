@@ -117,6 +117,7 @@ function createAssignButton(challengeRow) {
         assignButton.className = assignButton.className + " transparent inactive";
     }
     assignButton.onclick = function () {
+        assignButton.parentNode.removeChild(assignButton);
         assignMe(challengeRow.challengeId, myId);
     };
     return assignButton;
