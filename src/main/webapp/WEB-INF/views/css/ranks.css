@@ -1,0 +1,103 @@
+.inactive {
+    color: grey;
+}
+
+.table-title {
+    top: 100px;
+    position: absolute;
+    margin-left: 50px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.table {
+    position: absolute;
+    margin: 20px;
+    top: 100px;
+}
+
+.headers,
+.row {
+    padding-bottom: 5px;
+    width: 1300px;
+    border: solid 1px #cebfbf;
+    height: 21px;
+}
+
+.headers {
+    border: none;
+    background: #dedddd;
+}
+
+.headers > span,
+.row > span {
+    position: relative;
+    display: -webkit-inline-box;
+    display: -moz-inline-box;
+    top: 5px;
+    width: 55px;
+    margin-left: 20px;
+}
+
+.headers > .first-name,
+.row > .first-name,
+.headers > .last-name,
+.row > .last-name,
+.headers > .user-name,
+.row > .user-name {
+    width: 100px;
+}
+
+.headers > span:last-child,
+.row > span:last-child {
+    width: 150px;
+}
+
+.approved {
+    color: #53b100;
+    font-weight: bold;
+}
+
+.rejected {
+    color: #F44336;
+    font-weight: bold;
+}
+
+.approve,
+.reject,
+.challenge {
+    cursor: pointer;
+}
+
+.challenge {
+    color: blue;
+}
+
+.approve {
+    color: #53b100;
+}
+
+.reject {
+    color: #F44336;
+    margin-left: 10px;
+}
+
+span.avatar {
+    display: none;
+}
+
+.row.me > span {
+    font-weight: bold;
+}
+
+.row.active.me {
+    background-color: #F5F4FF;
+}
+
+.row.inactive {
+    pointer-events: all;
+}
+
+span.points {
+    width: 60px;
+}

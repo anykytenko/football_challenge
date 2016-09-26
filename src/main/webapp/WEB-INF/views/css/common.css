@@ -1,0 +1,43 @@
+h2 {
+    position: absolute;
+    font-size: 20px;
+    left: 1374px;
+    width: 526px;
+}
+
+.btn-default {
+    background: #6a89ff;
+    padding: 5px;
+    border-radius: 14px;
+    color: white;
+    min-width: 35px;
+    cursor: pointer;
+}
+
+.btn-default > span {
+    padding-left: 3px;
+}
+
+.btn-default:hover {
+    background: #5666ff;
+    color: yellow;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.page-title {
+    top: 80px;
+    position: absolute;
+    left: 33%;
+    font-size: 20px;
+}
+
+.transparent {
+    opacity: 0;
+}
+
+.inactive {
+    pointer-events: none;
+}
