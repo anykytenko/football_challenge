@@ -19,25 +19,21 @@ import support.calculators.ranks_table.point.ResultsCalculator;
 public class CalculatorsConfig {
 
     @Bean
-    @Scope("prototype")
     public TableCalculator tableCalculator() {
         return new CustomTableCalculator();
     }
 
     @Bean
-    @Scope("prototype")
     public ResultsCalculator pointsCalculator() {
         return new CustomResultsCalculator();
     }
 
     @Bean
-    @Scope("prototype")
     public ChallengesListCalculator challengesListCalculator() {
         return new CustomChallengesListCalculator();
     }
 
     @Bean
-    @Scope("prototype")
     public MessagesListCalculator messagesListCalculator() {
         return new CustomMessagesListCalculator();
     }
