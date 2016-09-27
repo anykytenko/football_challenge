@@ -78,7 +78,7 @@ public class ChallengeController {
     @RequestMapping(value = "/Approve/{hostUserId}/{receivingUserId}", method = RequestMethod.GET)
     public String approveChallenge(@PathVariable("hostUserId") int hostUserId,
                                    @PathVariable("receivingUserId") int receivingUserId) {
-        Challenge challenge = challengeHolder.ONE.PERSONAL_BETWEEN.getLastActive(hostUserId, receivingUserId);
+        Challenge challenge = challengeHolder.ONE.PERSONAL_BETWEEN.getActiveWhereHostAndReceiving(hostUserId, receivingUserId);
         challengeDao.approve(challenge.getId());
         challengeHolder.setNeedUpdateActive(true);
         notifyClient(hostUserId);
