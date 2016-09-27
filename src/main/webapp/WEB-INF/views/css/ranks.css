@@ -32,8 +32,7 @@
 .headers > span,
 .row > span {
     position: relative;
-    display: -webkit-inline-box;
-    display: -moz-inline-box;
+    display: inline-flex;
     top: 5px;
     width: 55px;
     margin-left: 20px;

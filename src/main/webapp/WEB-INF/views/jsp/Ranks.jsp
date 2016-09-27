@@ -37,7 +37,7 @@
     </h2>
 </c:if>
 Go to <a href="/Pages/Challenges">List of Challenges</a>
-<a class="tournamet-regulation" href="<%=request.getAttribute("tournamentRegulationsUrl")%>">Tournament Regulations</a>
+<a class="tournament-regulation" href="<%=request.getAttribute("tournamentRegulationsUrl")%>">Tournament Regulations</a>
 <div class="page-title bold">
     Current Ranks (<%=new DateFormatSymbols().getMonths()[Calendar.getInstance().get(Calendar.MONTH)]%>)
 </div>

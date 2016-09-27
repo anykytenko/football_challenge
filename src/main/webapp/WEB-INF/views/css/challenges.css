@@ -33,7 +33,7 @@
 .rows > div > .host-user,
 .rows > div > .receiving-user {
     width: 100px;
-    display: -webkit-inline-box;
+    display: inline-flex;
 }
 
 .rows > div > .receiving-user {
@@ -135,7 +135,7 @@ span.other-user2 {
 
 span.other-user1 {
     width: 100px;
-    display: -webkit-inline-box;
+    display: inline-flex;
 }
 
 .assign-me.btn-default {
@@ -200,4 +200,11 @@ span.other-user1 {
 #edit-challenge-popup .team1-goals, #edit-challenge-popup .team2-goals {
     position: relative;
     left: 72px;
+}
+
+span.date {
+    left: 182px;
+    margin-top: -16px;
+    position: absolute;
+    color: #044b8a;
 }

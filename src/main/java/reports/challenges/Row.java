@@ -3,6 +3,8 @@ package reports.challenges;
 import entities.challenge.Challenge;
 import entities.user.User;
 
+import java.util.Date;
+
 /**
  * Created by ANykytenko on 8/18/2016.
  */
@@ -19,6 +21,24 @@ public class Row {
     private Challenge.Result result;
     private int team1Goals;
     private int team2Goals;
+    private Date dateOfClosing;
+    private Date dateOfCreation;
+
+    public Date getDateOfCreation() {
+        return dateOfCreation;
+    }
+
+    public void setDateOfCreation(Date dateOfCreation) {
+        this.dateOfCreation = dateOfCreation;
+    }
+
+    public Date getDateOfClosing() {
+        return dateOfClosing;
+    }
+
+    public void setDateOfClosing(Date dateOfClosing) {
+        this.dateOfClosing = dateOfClosing;
+    }
 
     public int getChallengeId() {
         return challengeId;
