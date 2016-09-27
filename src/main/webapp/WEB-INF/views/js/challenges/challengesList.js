@@ -1,5 +1,7 @@
 var myId; // user id
 var users;
+var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
 
 function initChallengesPage(userId) {
     createChallengesList();
@@ -58,6 +60,9 @@ function checkKeyForClosingPopup(event) {
 function createRowElement(number, challengeRow) {
     var divElement = document.createElement("div");
     divElement.className = "row";
+    var dateString = challengeRow.dateOfClosing != null ? challengeRow.dateOfClosing : challengeRow.dateOfCreation;
+    var date = new Date(dateString);
+    divElement.appendChild(createSimpleSpan("date", date.getDate() + " " + months[date.getMonth()]));
     var myChallengeStyle = "";
     if (challengeRow.hostUser.id == myId || challengeRow.receivingUser.id == myId) {
         myChallengeStyle = "my-challenge";

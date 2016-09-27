@@ -41,6 +41,8 @@ public class CustomChallengesListCalculator implements ChallengesListCalculator 
             row.setOtherUser1(sessionsHolder.getUserById(challenge.getOtherUser1Id()));
             row.setReceivingUser(sessionsHolder.getUserById(challenge.getReceivingUserId()));
             row.setOtherUser2(sessionsHolder.getUserById(challenge.getOtherUser2Id()));
+            row.setDateOfClosing(challenge.getDateOfClosing());
+            row.setDateOfCreation(challenge.getDateOfCreation());
             row.setResult(challenge.getResult());
             rows.add(row);
         }

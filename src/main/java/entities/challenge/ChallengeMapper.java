@@ -20,8 +20,8 @@ public class ChallengeMapper implements RowMapper {
         challenge.setStatus(Challenge.Status.getById(rs.getInt(ChallengeDao.STATUS_ID_FIELD_NAME)));
         challenge.setTeam1Goals(rs.getInt(ChallengeDao.TEAM1_GOALS_FIELD_NAME));
         challenge.setTeam2Goals(rs.getInt(ChallengeDao.TEAM2_GOALS_FIELD_NAME));
-//        challenge.setDateOfClosing(new Date(rs.getTimestamp(ChallengeDao.DATE_OF_CLOSING_FIELD_NAME).getTime()));
-//        challenge.setDateOfCreation(new Date(rs.getTimestamp(ChallengeDao.DATE_OF_CREATION_FIELD_NAME).getTime()));
+        challenge.setDateOfClosing(rs.getDate(ChallengeDao.DATE_OF_CLOSING_FIELD_NAME));
+        challenge.setDateOfCreation(rs.getDate(ChallengeDao.DATE_OF_CREATION_FIELD_NAME));
         return challenge;
     }
 }
