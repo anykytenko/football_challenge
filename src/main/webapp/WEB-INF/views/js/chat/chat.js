@@ -1,5 +1,6 @@
 function createChat(updateEvent) {
-    sendRequest('GET', '/Reports/MessagesList', buildChat);
+    var location = window.location.protocol + "//" + window.location.host;
+    sendRequest('GET', location + '/Reports/MessagesList', buildChat);
     if (updateEvent != null && !iSendMessage) {
         document.getElementById("notification").play();
     }

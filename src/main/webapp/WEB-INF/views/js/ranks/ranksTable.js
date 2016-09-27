@@ -28,7 +28,6 @@ function createHeadersElement() {
     var headersElement = document.createElement("div");
     headersElement.className = "headers";
     headersElement.appendChild(createSimpleSpan("number", "#"));
-    headersElement.appendChild(createSimpleSpan("avatar", "Avatar"));
     headersElement.appendChild(createSimpleSpan("first-name", "First name"));
     headersElement.appendChild(createSimpleSpan("last-name", "Last name"));
     headersElement.appendChild(createSimpleSpan("user-name", "User name"));
@@ -55,10 +54,6 @@ function createRowElement(number, row, user) {
         rowElement.className = "row inactive";
     }
     rowElement.appendChild(createSimpleSpan("number", number + "."));
-    var ava = document.createElement("span");
-    ava.className = "avatar";
-    ava.setAttribute("style", "background: url(" + row.linkToAvatar + ") no-repeat; background-size: contain;");
-    rowElement.appendChild(ava);
     rowElement.appendChild(createSimpleSpan("first-name", row.firstName));
     rowElement.appendChild(createSimpleSpan("last-name", row.lastName));
     rowElement.appendChild(createSimpleSpan("user-name", row.userName));
