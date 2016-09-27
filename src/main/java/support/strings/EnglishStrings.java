@@ -18,7 +18,7 @@ public class EnglishStrings implements Strings {
     private Properties properties;
 
     public String challengeCreatedMessage(User user) {
-        return user.getFirstName() + " " + user.getLastName() + "known as ('" + user.getUserName() +
+        return user.getFirstName() + " " + user.getLastName() + " known as ('" + user.getUserName() +
                 "') has challenged you. \n\n You can approve or reject it here: " +
                 properties.getProperty(APPLICATION_URL) + "/Pages/Ranks";
     }
@@ -28,7 +28,7 @@ public class EnglishStrings implements Strings {
     }
 
     public String challengeApprovedMessage(User user) {
-        return user.getFirstName() + " " + user.getLastName() + "known as ('" + user.getUserName() +
+        return user.getFirstName() + " " + user.getLastName() + " known as ('" + user.getUserName() +
                 "') has already approved your challenge. \n\n Now you are waiting for assigning other users. " +
                 "You can find the state of your challenge here: " +
                 properties.getProperty(APPLICATION_URL) + "/Pages/Challenges";
@@ -39,7 +39,7 @@ public class EnglishStrings implements Strings {
     }
 
     public String challengeRejectedMessage(User user) {
-        return user.getFirstName() + " " + user.getLastName() + "known as ('" + user.getUserName() +
+        return user.getFirstName() + " " + user.getLastName() + " known as ('" + user.getUserName() +
                 ")' has rejected your challenge. \n\n You can find the state of all other challenges here: " +
                 properties.getProperty(APPLICATION_URL) + "/Pages/Challenges";
     }
