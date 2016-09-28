@@ -34,7 +34,8 @@
         <a href="/Logout">Logout</a>
     </h2>
 </c:if>
-Go to <a href="/Pages/Ranks">Current Ranks</a>
+<span>Go to</span>
+<a href="/Pages/Ranks">Current Ranks</a>
 <a class="tournament-regulation" href="<%=request.getAttribute("tournamentRegulationsUrl")%>">Tournament Regulations</a>
 <div class="page-title bold">List of Challenges</div>
 <div id="challenges-list" class="challenges-list"></div>

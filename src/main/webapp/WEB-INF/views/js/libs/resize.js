@@ -5,5 +5,7 @@ function initResizeWindowHandler() {
 }
 
 function resize() {
-    document.body.setAttribute("style", "transform: scale(" + document.documentElement.offsetWidth / fullWidth + ")")
+    document.body.setAttribute("style", "transform: scale(" + document.documentElement.offsetWidth / fullWidth + ")");
+    document.body.scrollLeft = 0;
+    document.body.scrollTop = 0;
 }
