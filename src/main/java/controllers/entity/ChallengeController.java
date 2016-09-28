@@ -51,7 +51,7 @@ public class ChallengeController {
                                   @PathVariable("receivingUserId") int receivingUserId) {
         challengeDao.create(hostUserId, receivingUserId);
         challengeHolder.setNeedUpdateActive(true);
-        notifyClient(receivingUserId);
+        notifyClient(hostUserId);
         notifyClient(receivingUserId);
         User hostUser = sessionsHolder.getUserById(hostUserId);
         User receivingUser = sessionsHolder.getUserById(receivingUserId);
