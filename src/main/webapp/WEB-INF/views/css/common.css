@@ -2,7 +2,8 @@ h2 {
     position: absolute;
     font-size: 20px;
     left: 1360px;
-    width: 526px;
+    width: 540px;
+    right: 20px;
 }
 
 .btn-default {
