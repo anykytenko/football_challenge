@@ -1,5 +1,4 @@
 <%@ page import="entities.user.User" %>
-<%@ page import="java.util.Date" %>
 <%@ page import="java.text.DateFormatSymbols" %>
 <%@ page import="java.util.Calendar" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core_1_1" %>
@@ -21,6 +20,7 @@
     <script type="text/javascript" src="../js/libs/stomp.js"></script>
     <script type="text/javascript" src="../js/libs/sockjs-0.3.4.js"></script>
     <script type="text/javascript" src="../js/libs/httpRequest.js"></script>
+    <script type="text/javascript" src="../js/libs/resize.js"></script>
 
     <script type="text/javascript" src="../js/ranks/ranksTable.js"></script>
     <script type="text/javascript" src="../js/ranks/ranksSocketCommunication.js"></script>
@@ -36,7 +36,8 @@
         <a href="/Logout">Logout</a>
     </h2>
 </c:if>
-Go to <a href="/Pages/Challenges">List of Challenges</a>
+<span>Go to</span>
+<a href="/Pages/Challenges">List of Challenges</a>
 <a class="tournament-regulation" href="<%=request.getAttribute("tournamentRegulationsUrl")%>">Tournament Regulations</a>
 <div class="page-title bold">
     Current Ranks (<%=new DateFormatSymbols().getMonths()[Calendar.getInstance().get(Calendar.MONTH)]%>)

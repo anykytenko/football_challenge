@@ -1,7 +1,7 @@
 h2 {
     position: absolute;
     font-size: 20px;
-    left: 1374px;
+    left: 1360px;
     width: 526px;
 }
 
@@ -30,8 +30,9 @@ h2 {
 .page-title {
     top: 80px;
     position: absolute;
-    left: 33%;
+    left: 587px;
     font-size: 20px;
+    width: 250px;
 }
 
 .transparent {
@@ -42,6 +43,43 @@ h2 {
     pointer-events: none;
 }
 
-a.tournament-regulation {
+a.tournamet-regulation {
     padding-left: 20px;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    width: 0;
+    height: 0;
+    position: absolute;
+    display: inline-table;
+}
+
+html {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+body > a {
+    position: absolute;
+    top: 0;
+    padding-left: 15px;
+    width: 300px;
+    left: 30px;
+}
+
+body > a.tournament-regulation {
+    left: 165px;
+}
+
+body > span {
+    position: absolute;
+    width: 40px;
 }

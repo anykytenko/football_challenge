@@ -18,6 +18,7 @@
     <script type="text/javascript" src="../js/libs/stomp.js"></script>
     <script type="text/javascript" src="../js/libs/sockjs-0.3.4.js"></script>
     <script type="text/javascript" src="../js/libs/httpRequest.js"></script>
+    <script type="text/javascript" src="../js/libs/resize.js"></script>
 
     <script type="text/javascript" src="../js/challenges/challengesList.js"></script>
     <script type="text/javascript" src="../js/challenges/challengesSocketCommunication.js"></script>
@@ -33,7 +34,8 @@
         <a href="/Logout">Logout</a>
     </h2>
 </c:if>
-Go to <a href="/Pages/Ranks">Current Ranks</a>
+<span>Go to</span>
+<a href="/Pages/Ranks">Current Ranks</a>
 <a class="tournament-regulation" href="<%=request.getAttribute("tournamentRegulationsUrl")%>">Tournament Regulations</a>
 <div class="page-title bold">List of Challenges</div>
 <div id="challenges-list" class="challenges-list"></div>
