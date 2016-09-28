@@ -1,4 +1,5 @@
 function initRanksPage(userId) {
+    initResizeWindowHandler();
     createRanksTable();
     initStompCommunication(userId);
     createChat();
@@ -22,6 +23,7 @@ function buildTable(status, response) {
             rowsElement.appendChild(createRowElement(i + 1, ranksTable.rows[i], ranksTable.user));
         }
     }
+    resize();
 }
 
 function createHeadersElement() {

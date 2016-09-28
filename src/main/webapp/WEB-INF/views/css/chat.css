@@ -40,6 +40,7 @@ div#chat {
 .title {
     font-weight: bold;
     font-size: 17px;
+    /*font-size: 106%;*/
 }
 
 .chat .title {

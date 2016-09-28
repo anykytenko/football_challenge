@@ -26,6 +26,7 @@ function buildChat(status, response) {
     history.scrollTop = history.scrollHeight;
     chatElement.appendChild(createChatInputBlock());
     input.focus();
+    resize();
 }
 
 function createMessagesHistoryBlock(responseDto) {

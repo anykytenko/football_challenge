@@ -18,6 +18,7 @@
     <script type="text/javascript" src="../js/libs/stomp.js"></script>
     <script type="text/javascript" src="../js/libs/sockjs-0.3.4.js"></script>
     <script type="text/javascript" src="../js/libs/httpRequest.js"></script>
+    <script type="text/javascript" src="../js/libs/resize.js"></script>
 
     <script type="text/javascript" src="../js/challenges/challengesList.js"></script>
     <script type="text/javascript" src="../js/challenges/challengesSocketCommunication.js"></script>
