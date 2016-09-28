@@ -70,7 +70,7 @@ html {
 
 body > a {
     position: absolute;
-    top: 0;
+    top: 10px;
     padding-left: 15px;
     width: 300px;
     left: 30px;
@@ -83,4 +83,6 @@ body > a.tournament-regulation {
 body > span {
     position: absolute;
     width: 40px;
+    top: 10px;
+    left: 5px;
 }
