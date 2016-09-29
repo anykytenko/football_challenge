@@ -14,15 +14,33 @@ public class Row {
 
     private User hostUser;      // team 1
     private User otherUser1;    // team 1
+    private int powerPercent1;
 
     private User receivingUser; // team 2
     private User otherUser2;    // team 2
+    private int powerPercent2;
 
     private Challenge.Result result;
     private int team1Goals;
     private int team2Goals;
     private Date dateOfClosing;
     private Date dateOfCreation;
+
+    public int getPowerPercent1() {
+        return powerPercent1;
+    }
+
+    public void setPowerPercent1(int powerPercent1) {
+        this.powerPercent1 = powerPercent1;
+    }
+
+    public int getPowerPercent2() {
+        return powerPercent2;
+    }
+
+    public void setPowerPercent2(int powerPercent2) {
+        this.powerPercent2 = powerPercent2;
+    }
 
     public Date getDateOfCreation() {
         return dateOfCreation;

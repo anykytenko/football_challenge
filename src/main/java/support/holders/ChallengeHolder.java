@@ -186,12 +186,12 @@ public class ChallengeHolder {
     }
 
     public boolean isNeedUpdateActive() {
-//        return needUpdateActive;
-        return true; // to support updating all the time
+        return needUpdateActive;
+//        return true; // to support updating all the time
     }
 
     public boolean isNeedUpdateClosed() {
-//        return needUpdateClosed;
-        return true; // to support updating all the time
+        return needUpdateClosed;
+//        return true; // to support updating all the time
     }
 }

@@ -163,10 +163,19 @@ span.other-user1 {
     border-radius: 15px;
 }
 
-#add-challenge {
+#add-challenge,
+#update-challenges {
     position: absolute;
     left: 20px;
+    width: 45px;
+}
+
+#add-challenge {
     top: 120px;
+}
+
+#update-challenges {
+    top: 150px;
 }
 
 #edit-challenge-popup select.host-user,
@@ -207,4 +216,9 @@ span.date {
     margin-top: -16px;
     position: absolute;
     color: #044b8a;
+}
+
+span.unassigned {
+    color: #c77700;
+    font-weight: bold;
 }
