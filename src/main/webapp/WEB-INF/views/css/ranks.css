@@ -100,3 +100,7 @@ span.avatar {
 span.points {
     width: 90px;
 }
+
+.rows > .row:nth-child(odd) {
+    background: #efecec;
+}
