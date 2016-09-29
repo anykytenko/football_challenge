@@ -41,7 +41,8 @@
 <div id="challenges-list" class="challenges-list"></div>
 <div id="chat" class="chat"></div>
 <%if (user.getRole().equals(User.Role.ADMIN)) {
-    %><span id="add-challenge" class="btn-default">+Add</span><%
+    %><span id="add-challenge" class="btn-default">+Add</span>
+    <span id="update-challenges" class="btn-default">Update</span><%
 }%>
 <audio id="notification" src="../audio/notification.mp3"></audio>
 </body>

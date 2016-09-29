@@ -8,15 +8,28 @@ function initChallengesPage(userId) {
     createChallengesList();
     initStompCommunication(userId);
     createChat();
+    fillUsers();
     initAddChallengeButton();
+    initUpdateChallengesButton();
     myId = userId;
 }
 
+function initUpdateChallengesButton() {
+    var updateChallengesElement = document.getElementById("update-challenges");
+    if (updateChallengesElement != null) {
+        updateChallengesElement.onclick = updateChallenges;
+    }
+}
+
+function updateChallenges() {
+    var location = window.location.protocol + "//" + window.location.host;
+    sendRequest("GET", location + "/Challenge/List/Update", function(status, responseText) {});
+}
+
 function initAddChallengeButton() {
-    fillUsers();
     var addChallengeElement = document.getElementById("add-challenge");
     if (addChallengeElement != null) {
-        addChallengeElement.onclick = function () {
+        addChallengeElement.onclick = function() {
             openEditPopup(null, "", "", -1, -1, -1, -1);
         }
     }
@@ -86,9 +99,12 @@ function createRowElement(number, challengeRow) {
     };
     divElement.appendChild(editButton);
     var otherUser1Name = "unassigned";
+    var otherUser1Style = "unassigned";
     var otherUser2Name = "unassigned";
+    var otherUser2Style = "unassigned";
     if (challengeRow.otherUser1 != null) {
         otherUser1Name = challengeRow.otherUser1.userName;
+        otherUser1Style = "";
         if (challengeRow.otherUser1.id == myId) {
             myChallengeStyle = "my-challenge";
         }
@@ -97,6 +113,7 @@ function createRowElement(number, challengeRow) {
     divElement.appendChild(createAssignButton(challengeRow));
     if (challengeRow.otherUser2 != null) {
         otherUser2Name = challengeRow.otherUser2.userName;
+        otherUser2Style = "";
         if (challengeRow.otherUser2.id == myId) {
             myChallengeStyle = "my-challenge";
         }

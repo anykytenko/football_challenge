@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import support.holders.ChallengeHolder;
 import support.holders.SessionsHolder;
 import support.mail.MailTransport;
@@ -45,6 +46,15 @@ public class ChallengeController {
 
     @Autowired
     private Strings strings;
+
+    @RequestMapping(value = "/List/Update", method = {RequestMethod.GET})
+    @ResponseBody
+    public String challengesUpdate() {
+        challengeHolder.setNeedUpdateActive(true);
+        challengeHolder.setNeedUpdateClosed(true);
+        notifyClients();
+        return "ok";
+    }
 
     @RequestMapping(value = "/Create/{hostUserId}/{receivingUserId}", method = RequestMethod.GET)
     public String createChallenge(@PathVariable("hostUserId") int hostUserId,
