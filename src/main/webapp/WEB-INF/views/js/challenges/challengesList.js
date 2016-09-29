@@ -109,7 +109,7 @@ function createRowElement(number, challengeRow) {
             myChallengeStyle = "my-challenge";
         }
     }
-    divElement.appendChild(createSimpleSpan("other-user1", otherUser1Name));
+    divElement.appendChild(createSimpleSpan("other-user1 " + otherUser1Style, otherUser1Name));
     divElement.appendChild(createAssignButton(challengeRow));
     if (challengeRow.otherUser2 != null) {
         otherUser2Name = challengeRow.otherUser2.userName;
@@ -118,7 +118,7 @@ function createRowElement(number, challengeRow) {
             myChallengeStyle = "my-challenge";
         }
     }
-    divElement.appendChild(createSimpleSpan("other-user2", otherUser2Name));
+    divElement.appendChild(createSimpleSpan("other-user2 " + otherUser2Style, otherUser2Name));
     if (challengeRow.otherUser1 != null && challengeRow.otherUser2 != null) {
         divElement.className = divElement.className + " ready";
         if (challengeRow.otherUser1.id == myId || challengeRow.otherUser2.id == myId) {
