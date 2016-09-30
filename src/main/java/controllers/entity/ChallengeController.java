@@ -80,7 +80,7 @@ public class ChallengeController {
                                   @PathVariable("team1Goals") int team1Goals,
                                   @PathVariable("team2Goals") int team2Goals) {
         challengeDao.create(hostUserId, otherUser1Id, receivingUserId, otherUser2Id, team1Goals, team2Goals);
-        challengeHolder.setNeedUpdateActive(true);
+        challengeHolder.setNeedUpdateClosed(true);
         notifyClients();
         return "redirect:/";
     }
