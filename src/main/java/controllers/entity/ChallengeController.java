@@ -16,6 +16,7 @@ import support.mail.MailTransport;
 import support.strings.Strings;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 
@@ -88,7 +89,9 @@ public class ChallengeController {
     @RequestMapping(value = "/Approve/{hostUserId}/{receivingUserId}", method = RequestMethod.GET)
     public String approveChallenge(@PathVariable("hostUserId") int hostUserId,
                                    @PathVariable("receivingUserId") int receivingUserId) {
-        Challenge challenge = challengeHolder.ONE.PERSONAL_BETWEEN.getActiveWhereHostAndReceiving(hostUserId, receivingUserId);
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+        int month = Calendar.getInstance().get(Calendar.MONTH) + 1;
+        Challenge challenge = challengeHolder.ONE.PERSONAL_BETWEEN.getActiveWhereHostAndReceiving(hostUserId, receivingUserId, year, month);
         challengeDao.approve(challenge.getId());
         challengeHolder.setNeedUpdateActive(true);
         notifyClient(hostUserId);
@@ -104,7 +107,9 @@ public class ChallengeController {
     @RequestMapping(value = "/Reject/{hostUserId}/{receivingUserId}", method = RequestMethod.GET)
     public String rejectChallenge(@PathVariable("hostUserId") int hostUserId,
                                   @PathVariable("receivingUserId") int receivingUserId) {
-        Challenge challenge = challengeHolder.ONE.PERSONAL_BETWEEN.getActiveWhereHostAndReceiving(hostUserId, receivingUserId);
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+        int month = Calendar.getInstance().get(Calendar.MONTH) + 1;
+        Challenge challenge = challengeHolder.ONE.PERSONAL_BETWEEN.getActiveWhereHostAndReceiving(hostUserId, receivingUserId, year, month);
         challengeDao.reject(challenge.getId());
         challengeHolder.setNeedUpdateActive(true);
         notifyClient(hostUserId);
@@ -130,7 +135,9 @@ public class ChallengeController {
     @RequestMapping(value = "/Assign/{challengeId}/{userId}", method = RequestMethod.GET)
     public String assignToChallenge(@PathVariable("challengeId") int challengeId,
                                     @PathVariable("userId") int userId) {
-        Challenge challenge = challengeHolder.ONE.CONCRETE.get(challengeId);
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+        int month = Calendar.getInstance().get(Calendar.MONTH) + 1;
+        Challenge challenge = challengeHolder.ONE.CONCRETE.get(challengeId, year, month);
         List<Integer> list = new ArrayList<Integer>();
         if (challenge.getOtherUser1Id() == -1) {
             list.add(1);
@@ -142,7 +149,7 @@ public class ChallengeController {
             challengeDao.assign(challengeId, list.get(random.nextInt(list.size())), userId);
             challengeHolder.setNeedUpdateActive(true);
             notifyClients();
-            challenge = challengeHolder.ONE.CONCRETE.get(challengeId);
+            challenge = challengeHolder.ONE.CONCRETE.get(challengeId, year, month);
             if (challenge.isReady()) {
                 User hostUser = sessionsHolder.getUserById(challenge.getHostUserId());
                 User receivingUser = sessionsHolder.getUserById(challenge.getReceivingUserId());

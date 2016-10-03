@@ -6,7 +6,7 @@ package support.calculators.ranks_table.point;
 public interface ResultsCalculator {
     int MINIMUM_CHALLENGES_COUNT = 15;
 
-    Results calculate(int userId);
+    Results calculate(int userId, int year, int month);
 
     class Results {
         private int lossesCount;

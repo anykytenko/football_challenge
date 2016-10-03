@@ -5,8 +5,7 @@ import entities.challenge.ChallengeDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by ANykytenko on 8/12/2016.
@@ -17,8 +16,8 @@ public class ChallengeHolder {
     @Autowired
     private ChallengeDao challengeDao;
 
-    private List<Challenge> allActiveChallenges;
-    private List<Challenge> allClosedChallenges;
+    private Map<String, List<Challenge>> allActiveChallenges = new HashMap<String, List<Challenge>>();
+    private Map<String, List<Challenge>> allClosedChallenges = new HashMap<String, List<Challenge>>();
     private boolean needUpdateActive = true;
     private boolean needUpdateClosed = true;
 
@@ -40,9 +39,9 @@ public class ChallengeHolder {
          */
         public class Concrete {
 
-            public Challenge get(int challengeId) {
-                List<Challenge> list = new ArrayList<Challenge>(ALL.getActive());
-                list.addAll(ALL.getClosed());
+            public Challenge get(int challengeId, int year, int month) {
+                List<Challenge> list = new ArrayList<Challenge>(ALL.getActive(year, month));
+                list.addAll(ALL.getClosed(year, month));
                 for (Challenge challenge : list) {
                     if (challenge.getId() == challengeId) {
                         return challenge;
@@ -63,9 +62,9 @@ public class ChallengeHolder {
              * @param user2Id user id: host or receiving
              * @return active challenge
              */
-            public Challenge getActiveWhereHostAndReceiving(int user1Id, int user2Id) {
+            public Challenge getActiveWhereHostAndReceiving(int user1Id, int user2Id, int year, int month) {
                 Challenge result = null;
-                for (Challenge challenge : ALL.getActive()) {
+                for (Challenge challenge : ALL.getActive(year, month)) {
                     if (challenge.getHostUserId() == user1Id) {
                         if (challenge.getReceivingUserId() == user2Id) {
                             result = challenge;
@@ -79,12 +78,12 @@ public class ChallengeHolder {
                 return result;
             }
 
-            public Challenge getLastActive(int user1Id, int user2Id) {
-                return getLastFromList(user1Id, user2Id, ALL.getActive());
+            public Challenge getLastActive(int user1Id, int user2Id, int year, int month) {
+                return getLastFromList(user1Id, user2Id, ALL.getActive(year, month));
             }
 
-            public Challenge getLastClosed(int user1Id, int user2Id) {
-                return getLastFromList(user1Id, user2Id, ALL.getActive());
+            public Challenge getLastClosed(int user1Id, int user2Id, int year, int month) {
+                return getLastFromList(user1Id, user2Id, ALL.getActive(year, month));
             }
 
             private Challenge getLastFromList(int user1Id, int user2Id, List<Challenge> challenges) {
@@ -120,12 +119,12 @@ public class ChallengeHolder {
          */
         public class ByUser {
 
-            public List<Challenge> getActive(int userId) {
-                return getFromList(userId, ALL.getActive());
+            public List<Challenge> getActive(int userId, int year, int month) {
+                return getFromList(userId, ALL.getActive(year, month));
             }
 
-            public List<Challenge> getClosed(int userId) {
-                return getFromList(userId, ALL.getClosed());
+            public List<Challenge> getClosed(int userId, int year, int month) {
+                return getFromList(userId, ALL.getClosed(year, month));
             }
 
             public List<Challenge> getFromList(int userId, List<Challenge> list) {
@@ -140,23 +139,35 @@ public class ChallengeHolder {
             }
         }
 
-        public List<Challenge> getActive() {
-            if (isNeedUpdateActive()) {
-                updateActive();
+        public List<Challenge> getActive(int year, int month) {
+            int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+            int currentMonth = Calendar.getInstance().get(Calendar.MONTH) + 1;
+            if (isNeedUpdateActive() && year == currentYear && month == currentMonth) {
+                updateActive(year, month);
+            } else {
+                if (allActiveChallenges.get(month + "." + year) == null) {
+                    updateActive(year, month);
+                }
             }
-            return allActiveChallenges;
+            return allActiveChallenges.get(month + "." + year);
         }
 
-        public List<Challenge> getClosed() {
-            if (isNeedUpdateClosed()) {
-                updateClosed();
+        public List<Challenge> getClosed(int year, int month) {
+            int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+            int currentMonth = Calendar.getInstance().get(Calendar.MONTH) + 1;
+            if (isNeedUpdateClosed() && year == currentYear && month == currentMonth) {
+                updateClosed(year, month);
+            } else {
+                if (allClosedChallenges.get(month + "." + year) == null) {
+                    updateClosed(year, month);
+                }
             }
-            return allClosedChallenges;
+            return allClosedChallenges.get(month + "." + year);
         }
 
-        public List<Challenge> getApproved() {
+        public List<Challenge> getApproved(int year, int month) {
             List<Challenge> result = new ArrayList<Challenge>();
-            for (Challenge challenge : getActive()) {
+            for (Challenge challenge : getActive(year, month)) {
                 if (challenge.getStatus() == Challenge.Status.APPROVED) {
                     result.add(challenge);
                 }
@@ -167,13 +178,13 @@ public class ChallengeHolder {
 
     //==================================================================================================================
 
-    public void updateClosed() {
-        allClosedChallenges = challengeDao.getClosed();
+    public void updateClosed(int year, int month) {
+        allClosedChallenges.put(month + "." + year,challengeDao.getClosed(year, month));
         setNeedUpdateClosed(false);
     }
 
-    public void updateActive() {
-        allActiveChallenges = challengeDao.getActive();
+    public void updateActive(int year, int month) {
+        allActiveChallenges.put(month + "." + year, challengeDao.getActive(year, month));
         setNeedUpdateActive(false);
     }
 

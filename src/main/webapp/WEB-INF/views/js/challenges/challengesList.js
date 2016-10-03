@@ -1,6 +1,5 @@
 var myId; // user id
 var users;
-var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 
 function initChallengesPage(userId) {

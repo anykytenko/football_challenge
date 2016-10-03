@@ -5,10 +5,12 @@ function initStompCommunication(userId) {
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function(frame) {
         stompClient.subscribe('/UpdateEvent/' + userId, function(response){
-            createRanksTable();
+            var dateNow = new Date();
+            createRanksTable(dateNow.getFullYear(), dateNow.getMonth() + 1);
         });
         stompClient.subscribe('/UpdateEvent/All', function(response){
-            createRanksTable();
+            var dateNow = new Date();
+            createRanksTable(dateNow.getFullYear(), dateNow.getMonth() + 1);
         });
         stompClient.subscribe('/UpdateEvent/Chat', function(response){
             createChat(response);
