@@ -9,6 +9,7 @@ import support.holders.ChallengeHolder;
 import support.holders.SessionsHolder;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -25,8 +26,10 @@ public class CustomChallengesListCalculator implements ChallengesListCalculator 
 
     public ChallengesList calculate() {
         ChallengesList challengesList = new ChallengesList();
-        challengesList.setActiveChallengeRows(createChallengeRows(challengeHolder.ALL.getApproved()));
-        challengesList.setClosedChallengeRows(createChallengeRows(challengeHolder.ALL.getClosed()));
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+        int month = Calendar.getInstance().get(Calendar.MONTH) + 1;
+        challengesList.setActiveChallengeRows(createChallengeRows(challengeHolder.ALL.getApproved(year, month)));
+        challengesList.setClosedChallengeRows(createChallengeRows(challengeHolder.ALL.getClosed(year, month)));
         return challengesList;
     }
 

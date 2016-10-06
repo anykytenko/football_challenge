@@ -1,6 +1,7 @@
 package controllers;
 
 import entities.message.MessageDao;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 import reports.challenges.ChallengesList;
 import reports.challenges.Row;
@@ -42,12 +43,13 @@ public class ReportsController {
     @Autowired
     private SessionsHolder sessionsHolder;
 
-    @RequestMapping(value = "/RanksTable", method = {RequestMethod.GET})
+    @RequestMapping(value = "/RanksTable/{year}/{month}", method = {RequestMethod.GET})
     @ResponseBody
-    public RanksTable ranksTable() {
+    public RanksTable ranksTable(@PathVariable("year") int year,
+                                 @PathVariable("month") int month) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User securityUser = (User) (auth.getPrincipal());
-        return tableCalculator.calculate(securityUser);
+        return tableCalculator.calculate(securityUser, year, month);
     }
 
     @RequestMapping(value = "/ChallengesList", method = {RequestMethod.GET})

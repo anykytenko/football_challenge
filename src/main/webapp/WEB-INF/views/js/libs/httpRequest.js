@@ -1,3 +1,5 @@
+var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
 function sendRequest(method, theUrl, onGetResponse) {
     var request = new XMLHttpRequest();
     request.open(method, theUrl, true);

@@ -16,14 +16,14 @@ public class CustomResultsCalculator implements ResultsCalculator {
     @Autowired
     private ChallengeHolder challengeHolder;
 
-    public Results calculate(int userId) {
+    public Results calculate(int userId, int year, int month) {
         Results results = new Results();
         int lossesCount = 0;
         int winsCount = 0;
         int drawsCount = 0;
         int scored = 0;
         int conceded = 0;
-        List<Challenge> challenges = challengeHolder.ALL.BY_USER.getClosed(userId);
+        List<Challenge> challenges = challengeHolder.ALL.BY_USER.getClosed(userId, year, month);
         for (Challenge challenge : challenges) {
             Challenge.Result result = challenge.getResult();
             if (result == Challenge.Result.DRAW) {

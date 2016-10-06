@@ -1,13 +1,16 @@
 function initRanksPage(userId) {
     initResizeWindowHandler();
-    createRanksTable();
+    var dateNow = new Date();
+    createRanksTable(dateNow.getFullYear(), dateNow.getMonth() + 1);
     initStompCommunication(userId);
     createChat();
 }
 
-function createRanksTable() {
+function createRanksTable(year, month) {
+    initPreviousAndNextListeners(year, month);
+    document.getElementById("title-value").innerText = "Ranks (" + months[month - 1] + ", " + year + ")";
     var location = window.location.protocol + "//" + window.location.host;
-    sendRequest('GET', location + '/Reports/RanksTable', buildTable);
+    sendRequest('GET', location + '/Reports/RanksTable/' + year + '/' + month, buildTable);
 }
 
 function buildTable(status, response) {
@@ -24,6 +27,29 @@ function buildTable(status, response) {
         }
     }
     resize();
+}
+
+function initPreviousAndNextListeners(year, month) {
+    var previousElement = document.getElementById("previous-rank");
+    var nextElement = document.getElementById("next-rank");
+    previousElement.onclick = function() {
+        var newYear = year;
+        var newMonth = month - 1;
+        if (month == 1) {
+            newYear = year - 1;
+            newMonth = 12;
+        }
+        createRanksTable(newYear, newMonth);
+    };
+    nextElement.onclick = function() {
+        var newYear = year;
+        var newMonth = month + 1;
+        if (month == 12) {
+            newYear = year + 1;
+            newMonth = 1;
+        }
+        createRanksTable(newYear, newMonth);
+    };
 }
 
 function createHeadersElement() {

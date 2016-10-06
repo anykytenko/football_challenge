@@ -40,7 +40,11 @@
 <a href="/Pages/Challenges">List of Challenges</a>
 <a class="tournament-regulation" href="<%=request.getAttribute("tournamentRegulationsUrl")%>">Tournament Regulations</a>
 <div class="page-title bold">
-    Current Ranks (<%=new DateFormatSymbols().getMonths()[Calendar.getInstance().get(Calendar.MONTH)]%>)
+    <span id="previous-rank">Previous</span>
+    <span id="title-value"><%int month = Calendar.getInstance().get(Calendar.MONTH);
+    int year = Calendar.getInstance().get(Calendar.YEAR);%>
+    Current Ranks (<%=new DateFormatSymbols().getMonths()[month] + ", " + year%>)</span>
+    <span id="next-rank">Next</span>
 </div>
 <div id="rank-table" class="table"></div>
 <div id="chat" class="chat"></div>

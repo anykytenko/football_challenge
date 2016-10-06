@@ -3,6 +3,7 @@ package entities.challenge;
 import entities.AbstractJdbcTemplate;
 
 import javax.sql.DataSource;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -35,19 +36,33 @@ public class ChallengeJdbcTemplate extends AbstractJdbcTemplate implements Chall
         releaseConnection();
     }
 
-    public List<Challenge> getActive() {
+    public List<Challenge> getActive(int year, int month) {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         String sql = "SELECT * FROM " + TABLE_NAME + " WHERE " + STATUS_ID_FIELD_NAME + " NOT IN(?) AND MONTH(" +
-                        DATE_OF_CREATION_FIELD_NAME + ") = MONTH(NOW()) ORDER BY " + DATE_OF_CREATION_FIELD_NAME;
-        Object[] objects = {Challenge.Status.CLOSED.getId()};
+                        DATE_OF_CREATION_FIELD_NAME + ") = MONTH(?) ORDER BY " + DATE_OF_CREATION_FIELD_NAME;
+        Date date = null;
+        try {
+            date = formatter.parse("01-" + month + "-" + year);
+        } catch (Exception ex) {
+            System.out.println("Error parsing date");
+        }
+        Object[] objects = {Challenge.Status.CLOSED.getId(), date};
         List<Challenge> challenges = jdbcTemplateObject.query(sql, objects, new ChallengeMapper());
         releaseConnection();
         return challenges;
     }
 
-    public List<Challenge> getClosed() {
+    public List<Challenge> getClosed(int year, int month) {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         String sql = "SELECT * FROM " + TABLE_NAME + " WHERE " + STATUS_ID_FIELD_NAME + " IN(?) AND MONTH(" +
-                        DATE_OF_CLOSING_FIELD_NAME + ") = MONTH(NOW()) ORDER BY " + DATE_OF_CLOSING_FIELD_NAME;
-        Object[] objects = {Challenge.Status.CLOSED.getId()};
+                        DATE_OF_CLOSING_FIELD_NAME + ") = MONTH(?) ORDER BY " + DATE_OF_CLOSING_FIELD_NAME;
+        Date date = null;
+        try {
+            date = formatter.parse("01-" + month + "-" + year);
+        } catch (Exception ex) {
+            System.out.println("Error parsing date");
+        }
+        Object[] objects = {Challenge.Status.CLOSED.getId(), date};
         List<Challenge> challenges = jdbcTemplateObject.query(sql, objects, new ChallengeMapper());
         releaseConnection();
         return challenges;
@@ -63,13 +78,6 @@ public class ChallengeJdbcTemplate extends AbstractJdbcTemplate implements Chall
     public void reject(Integer id) {
         String sql = "UPDATE " + TABLE_NAME + " SET " + STATUS_ID_FIELD_NAME + " = ? WHERE " + ID_FIELD_NAME + " = ?";
         Object[] objects = {Challenge.Status.REJECTED.getId(), id};
-        jdbcTemplateObject.update(sql, objects);
-        releaseConnection();
-    }
-
-    public void restoreRejected(Integer id) {
-        String sql = "UPDATE " + TABLE_NAME + " SET " + STATUS_ID_FIELD_NAME + " = ? WHERE " + ID_FIELD_NAME + " = ?";
-        Object[] objects = {Challenge.Status.IN_PROGRESS.getId(), id};
         jdbcTemplateObject.update(sql, objects);
         releaseConnection();
     }

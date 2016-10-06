@@ -1,5 +1,6 @@
 package entities.challenge;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,15 +24,14 @@ public interface ChallengeDao {
     void create(int hostUserId, int otherUser1Id, int guestUserId, int otherUser2Id, int team1Goals, int team2Goals);
 
 
-    List<Challenge> getActive();
+    List<Challenge> getActive(int year, int month);
 
-    List<Challenge> getClosed();
+    List<Challenge> getClosed(int year, int month);
 
     void approve(Integer id);
 
     void reject(Integer id);
 
-    void restoreRejected(Integer id);
 
     void close(Integer id, int team1Goals, int team2Goals);
 
