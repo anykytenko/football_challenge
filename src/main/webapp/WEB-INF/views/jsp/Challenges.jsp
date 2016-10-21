@@ -19,6 +19,7 @@
     <script type="text/javascript" src="../js/libs/sockjs-0.3.4.js"></script>
     <script type="text/javascript" src="../js/libs/httpRequest.js"></script>
     <script type="text/javascript" src="../js/libs/resize.js"></script>
+    <script type="text/javascript" src="../js/libs/updateFromDb.js"></script>
 
     <script type="text/javascript" src="../js/challenges/challengesList.js"></script>
     <script type="text/javascript" src="../js/challenges/challengesSocketCommunication.js"></script>
@@ -42,7 +43,7 @@
 <div id="chat" class="chat"></div>
 <%if (user.getRole().equals(User.Role.ADMIN)) {
     %><span id="add-challenge" class="btn-default">+Add</span>
-    <span id="update-challenges" class="btn-default">Update</span><%
+    <span id="update-from-db" class="btn-default">Update</span><%
 }%>
 <audio id="notification" src="../audio/notification.mp3"></audio>
 </body>

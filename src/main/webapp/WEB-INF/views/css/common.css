@@ -86,3 +86,9 @@ body > span {
     top: 10px;
     left: 5px;
 }
+
+#update-from-db {
+    top: 6px;
+    width: 45px;
+    left: 375px;
+}

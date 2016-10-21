@@ -4,6 +4,7 @@ function initRanksPage(userId) {
     createRanksTable(dateNow.getFullYear(), dateNow.getMonth() + 1);
     initStompCommunication(userId);
     createChat();
+    initUpdateFromDbButton();
 }
 
 function createRanksTable(year, month) {

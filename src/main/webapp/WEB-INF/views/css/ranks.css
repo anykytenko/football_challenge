@@ -104,6 +104,7 @@ span.points {
 .rows > .row:nth-child(odd) {
     background: #efecec;
 }
+
 span#previous-rank,span#next-rank {
     color: blue;
     font-size: medium;
@@ -113,4 +114,5 @@ span#previous-rank,span#next-rank {
     -ms-user-select: none; /* IE10+ */    /* Rules below not implemented in browsers yet */
     -o-user-select: none;
     user-select: none;
+    cursor: pointer;
 }

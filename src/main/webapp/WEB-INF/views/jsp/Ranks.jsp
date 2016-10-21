@@ -21,6 +21,7 @@
     <script type="text/javascript" src="../js/libs/sockjs-0.3.4.js"></script>
     <script type="text/javascript" src="../js/libs/httpRequest.js"></script>
     <script type="text/javascript" src="../js/libs/resize.js"></script>
+    <script type="text/javascript" src="../js/libs/updateFromDb.js"></script>
 
     <script type="text/javascript" src="../js/ranks/ranksTable.js"></script>
     <script type="text/javascript" src="../js/ranks/ranksSocketCommunication.js"></script>
@@ -48,6 +49,9 @@
 </div>
 <div id="rank-table" class="table"></div>
 <div id="chat" class="chat"></div>
+<%if (user.getRole().equals(User.Role.ADMIN)) {
+    %><span id="update-from-db" class="btn-default">Update</span><%
+}%>
 <audio id="notification" src="../audio/notification.mp3"></audio>
 </body>
 </html>

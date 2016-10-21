@@ -6,6 +6,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.security.authentication.event.InteractiveAuthenticationSuccessEvent;
 import org.springframework.security.core.session.SessionDestroyedEvent;
+import org.springframework.security.web.session.HttpSessionDestroyedEvent;
 import support.holders.SessionsHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -29,12 +30,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private SimpMessagingTemplate messagingTemplate;
 
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+    public void configureGlobal(AuthenticationManagerBuilder auth) {
+        sessionsHolder().setAuthenticationManagerBuilder(auth);
         sessionsHolder().update();
-        InMemoryUserDetailsManagerConfigurer<AuthenticationManagerBuilder> inMemoryAuthentication = auth.inMemoryAuthentication();
-        for (User user : sessionsHolder().getAllUsers()) {
-            inMemoryAuthentication.withUser(user.getUserName()).password(user.getPassword()).roles(user.getRole().name()).and();
-        }
     }
 
     @Override
@@ -64,10 +62,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public ApplicationListener applicationListener() {
         return new ApplicationListener() {
             public void onApplicationEvent(ApplicationEvent applicationEvent) {
-                if (applicationEvent instanceof InteractiveAuthenticationSuccessEvent) {
-                    notifyClients();
-                }
-                if (applicationEvent instanceof SessionDestroyedEvent) {
+                if (applicationEvent instanceof InteractiveAuthenticationSuccessEvent ||
+                        applicationEvent instanceof SessionDestroyedEvent) {
                     notifyClients();
                 }
             }

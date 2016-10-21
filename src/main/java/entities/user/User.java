@@ -2,11 +2,19 @@ package entities.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by ANykytenko on 8/2/2016.
  */
-public class User {
+public class User implements UserDetails {
 
     private String lastName;
 
@@ -70,20 +78,46 @@ public class User {
         this.userName = userName;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public Role getRole() {
         return role;
     }
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public Collection<GrantedAuthority> getAuthorities() {
+        return new ArrayList<GrantedAuthority>() {{
+            add(new SimpleGrantedAuthority(getRole().name()));
+        }};
+    }
+
+    public String getUsername() {
+        return getUserName();
+    }
+
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    public boolean isEnabled() {
+        return true;
     }
 
     @Override
