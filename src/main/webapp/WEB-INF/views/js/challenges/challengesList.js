@@ -9,20 +9,8 @@ function initChallengesPage(userId) {
     createChat();
     fillUsers();
     initAddChallengeButton();
-    initUpdateChallengesButton();
+    initUpdateFromDbButton();
     myId = userId;
-}
-
-function initUpdateChallengesButton() {
-    var updateChallengesElement = document.getElementById("update-challenges");
-    if (updateChallengesElement != null) {
-        updateChallengesElement.onclick = updateChallenges;
-    }
-}
-
-function updateChallenges() {
-    var location = window.location.protocol + "//" + window.location.host;
-    sendRequest("GET", location + "/Challenge/List/Update", function(status, responseText) {});
 }
 
 function initAddChallengeButton() {

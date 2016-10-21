@@ -4,11 +4,16 @@ import entities.user.User;
 import entities.user.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.authentication.configurers.provisioning.InMemoryUserDetailsManagerConfigurer;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.session.SessionInformation;
 import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Component;
 
-import java.sql.SQLException;
 import java.util.*;
 
 /**
@@ -24,9 +29,16 @@ public class SessionsHolder {
     @Autowired
     private UserDao userDao;
 
-    private List<User> allUsers;
+    private InMemoryUserDetailsManagerConfigurer<AuthenticationManagerBuilder> inMemoryAuthentication;
 
-    public List<User> getAllUsers() {
+    private List<User> allUsers;
+    private boolean needUpdate = true;
+    private AuthenticationManagerBuilder authenticationManagerBuilder;
+
+    public synchronized List<User> getAllUsers() {
+        if (isNeedUpdate()) {
+            update();
+        }
         return allUsers;
     }
 
@@ -44,7 +56,7 @@ public class SessionsHolder {
     }
 
     public User getUserByName(String userName) {
-        for (User user : allUsers) {
+        for (User user : getAllUsers()) {
             if (user.getUserName().equals(userName)) {
                 return user;
             }
@@ -53,7 +65,7 @@ public class SessionsHolder {
     }
 
     public User getUserById(int id) {
-        for (User user : allUsers) {
+        for (User user : getAllUsers()) {
             if (user.getId().equals(id)) {
                 return user;
             }
@@ -63,7 +75,7 @@ public class SessionsHolder {
 
     public List<SessionInformation> getActiveSessions() {
         List<SessionInformation> activeSessions = new ArrayList<SessionInformation>();
-        for(Object principal : sessionRegistry.getAllPrincipals()) {
+        for (Object principal : sessionRegistry.getAllPrincipals()) {
             activeSessions.addAll(sessionRegistry.getAllSessions(principal, false));
         }
         return activeSessions;
@@ -73,7 +85,28 @@ public class SessionsHolder {
         return sessionRegistry.getAllSessions(principal, false);
     }
 
-    public void update() throws SQLException {
+    public void update() {
         allUsers = userDao.get();
+        for (User user : allUsers) {
+            inMemoryAuthentication.withUser(user.getUserName()).password(user.getPassword()).roles(user.getRole().name()).and();
+        }
+        needUpdate = false;
+    }
+
+    public boolean isNeedUpdate() {
+        return needUpdate;
+    }
+
+    public void setNeedUpdate(boolean needUpdate) {
+        this.needUpdate = needUpdate;
+    }
+
+    public void setAuthenticationManagerBuilder(AuthenticationManagerBuilder authenticationManagerBuilder) {
+        this.authenticationManagerBuilder = authenticationManagerBuilder;
+        try {
+            inMemoryAuthentication = authenticationManagerBuilder.inMemoryAuthentication();
+        } catch (Exception ex) {
+            int a = 0;
+        }
     }
 }

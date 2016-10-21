@@ -4,7 +4,6 @@ import entities.message.MessageDao;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 import reports.challenges.ChallengesList;
-import reports.challenges.Row;
 import reports.messages.MessagesReport;
 import reports.ranks.RanksTable;
 import org.springframework.beans.factory.annotation.Autowired;
